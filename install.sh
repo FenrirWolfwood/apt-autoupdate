@@ -171,7 +171,7 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 sudo cp * /opt/apt-autoupdate
-sudo chmod +x /opt/apt-autoupdate/*
+sudo chmod +x /opt/apt-autoupdate/apt-autoupdate.sh /opt/apt-autoupdate/install.sh /opt/apt-autoupdate/uninstall.sh
 sudo ln -s /opt/apt-autoupdate/apt-autoupdate.sh /usr/bin/apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
