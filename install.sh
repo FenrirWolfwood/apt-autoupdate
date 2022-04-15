@@ -20,7 +20,7 @@ else
     default_term="$default_term -e bash -ic"
 fi
 
-$default_term '
+#$default_term '
 
 
 
