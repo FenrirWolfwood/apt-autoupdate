@@ -4,6 +4,8 @@ Este es un pequeño script para automatizar las actualizaciones a través del ge
 
 \* Debería funcionar sin problemas con cualquier derivado de Debian / Ubuntu o simplemente cualquier distribución GNU/Linux con _APT_ y _Anacron_ instalados.
 
+<br />
+
 ![img-autoupdate](assets/img-autoupdate.png)
 
 <br />
@@ -12,15 +14,25 @@ Este es un pequeño script para automatizar las actualizaciones a través del ge
 
 Para instalarlo descargue el [fichero zip](https://github.com/FenrirWolfwood/apt-autoupdate/archive/refs/tags/test.zip), descomprimalo y, desde una terminal o simplemente haciendo doble clic sobre el, ejecute el fichero **install.sh**.
 
-A continuación se le abrirá una nueva ventana de terminal pidiéndole confirmación. Para continuar seleccione <span style="color:lightgreen">Si</span> y pulse Enter, o use los cursores ⇧ y ⇩ para cambiar la selección a <span style="color:red">No</span> si desea salir. Seguidamente le pedirá que escriba la contraseña de **su usuario** para autorizar el proceso de instalación.
+A continuación se le abrirá una nueva ventana de terminal pidiéndole confirmación. Para continuar seleccione ![Si](assets/Si.png) y pulse Enter, o use los cursores ⇧ y ⇩ para cambiar la selección a ![No](assets/No.png) si desea salir. Seguidamente le pedirá que escriba la contraseña de **su usuario** para autorizar el proceso de instalación.
+
+<br />
 
 ![img-confirmation](assets/img-confirmation.png)
 
+<br />
+
 Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/apt-autoupdate_, se copiarán todos los ficheros en ella y se programará en _Anacron_ que se pasen las actualizaciones del sistema diariamente. Si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un tiempo si no la ha cerrado usted antes.
+
+<br />
 
 ![img-success](assets/img-success.png)
 
+<br />
+
 En el caso de que hubiera algún problema con la instalación, se borrarán los cambios que se hayan hecho y le saldrá un mensaje informándole de cual ha sido el problema. En este caso la ventana permanecerá abierta hasta que usted pueda ver el mensaje y la cierre.
+
+<br />
 
 ![img-fail](assets/img-fail.png)
 
