@@ -6,7 +6,9 @@ Este es un pequeño script para automatizar las actualizaciones a través del ge
 
 <br />
 
-![img-autoupdate](assets/img-autoupdate.png)
+<p align="center">
+   <img src="assets/img-autoupdate.png" alt="img-autoupdate"/>
+</p>
 
 <br />
 
@@ -18,7 +20,9 @@ A continuación se le abrirá una nueva ventana de terminal pidiéndole confirma
 
 <br />
 
-![img-confirmation](assets/img-confirmation.png)
+<p align="center">
+   <img src="assets/img-confirmation.png" alt="img-confirmation"/>
+</p>
 
 <br />
 
@@ -26,7 +30,9 @@ Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/apt-
 
 <br />
 
-![img-success](assets/img-success.png)
+<p align="center">
+   <img src="assets/img-success.png" alt="img-success"/>
+</p>
 
 <br />
 
@@ -34,7 +40,9 @@ En el caso de que hubiera algún problema con la instalación, se borrarán los 
 
 <br />
 
-![img-fail](assets/img-fail.png)
+<p align="center">
+   <img src="assets/img-fail.png" alt="img-fail"/>
+</p>
 
 <br />
 
