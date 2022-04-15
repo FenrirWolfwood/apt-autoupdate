@@ -5,8 +5,7 @@ Este es un pequeño script para automatizar las actualizaciones a través del ge
 \* Debería funcionar sin problemas con cualquier derivado de Debian / Ubuntu o simplemente cualquier distribución GNU/Linux con _APT_ y _Anacron_ instalados.
 
 ![img-autoupdate](assets/img-autoupdate.png)
-\
-\
+<br /><br />
 
 ---
 
@@ -25,8 +24,7 @@ Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/apt-
 En el caso de que hubiera algún problema con la instalación, se borrarán los cambios que se hayan hecho y le saldrá un mensaje informándole de cual ha sido el problema. En este caso la ventana permanecerá abierta hasta que usted pueda ver el mensaje y la cierre.
 
 ![img-fail](assets/img-fail.png)
-\
-\
+<br /><br />
 
 ### INSTALACIÓN MANUAL
 
@@ -53,8 +51,7 @@ En el caso de que el script de instalación no le funcione o simplemente prefier
    ```
 
 Con estos pasos la instalación estaría terminada y ya puede borrar los ficheros descargados ya que en caso de necesitar alguno de ellos los encontrará en la carpeta donde los ha copiado usted mismo, incluido este manual.
-\
-\
+<br /><br />
 
 ---
 
@@ -65,8 +62,7 @@ Si decide utilizar los servicios de actualización automática que le ofrezca su
 Este script eliminará la carpeta en _/opt/apt-autoupdate_ junto con su contenido y borrará la tarea programada creada en _Anacron_. Igual que en la instalación, si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un tiempo si no la ha cerrado usted antes.
 
 En el caso de que hubiera algún problema con la desinstalación, le saldrá un mensaje informándole de cual ha sido el problema y la ventana permanecerá abierta hasta que usted pueda ver el mensaje y la cierre.
-\
-\
+<br /><br />
 
 ### DESINSTALACIÓN MANUAL
 
