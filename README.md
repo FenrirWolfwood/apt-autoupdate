@@ -14,7 +14,7 @@ Para instalarlo descargue el [fichero zip](https://github.com/FenrirWolfwood/apt
 
 A continuación se le abrirá una nueva ventana de terminal pidiéndole confirmación. Para continuar seleccione <span style="color:lightgreen">Si</span> y pulse Enter, o use los cursores ⇧ y ⇩ para cambiar la selección a <span style="color:red">No</span> si desea salir. Seguidamente le pedirá que escriba la contraseña de **su usuario** para autorizar el proceso de instalación.
 
-![img-confirmation](/home/harlock/Projects/apt-autoupdate/assets/img-confirmation.png)
+![img-confirmation](assets/img-confirmation.png)
 
 Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/apt-autoupdate_, se copiarán todos los ficheros en ella y se programará en _Anacron_ que se pasen las actualizaciones del sistema diariamente. Si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un tiempo si no la ha cerrado usted antes.
 
