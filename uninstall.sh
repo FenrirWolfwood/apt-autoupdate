@@ -28,7 +28,7 @@ $default_term '
 
 echo -e ""
     echo -e "  \033[1m=================================================================\033[0m"
-echo -e "  \033[1m|       DESINSTALANDO \"ACTUALIZACIÓN AUTOMÁTICA PARA APT\"       |\033[0m"
+echo -e "  \033[1m|       DESINSTALANDO \"ACTUALIZACIÓN AUTOMÁTICA CON APT\"        |\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
 echo -e ""
 
@@ -43,7 +43,7 @@ advertencia() {
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Está a punto de desinstalar el programa de \033[1mACTUALIZACIÓN      |\033[0m"
-    echo -e "  \033[1m|\033[0m \033[1mAUTOMÁTICA PARA APT\033[0m.                                          \033[1m|\033[0m"
+    echo -e "  \033[1m|\033[0m \033[1mAUTOMÁTICA CON APT\033[0m.                                           \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Esto significa que a partir de ahora su sistema tendrá que    \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m encargarse de las actualizaciones por sus propios medios o    \033[1m|\033[0m"
@@ -57,7 +57,7 @@ advertencia() {
     
     options=("Si" "No")
     
-    source ./menu-si-no.sh
+    source ./assets/menu-si-no.sh
     select_option "${options[@]}"
     choice=$?
 
@@ -105,7 +105,7 @@ exito() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     
-    read -t 10 cerrar
+    read -t 20 cerrar
     exit
 }
 

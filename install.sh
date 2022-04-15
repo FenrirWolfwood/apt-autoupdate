@@ -28,7 +28,7 @@ $default_term '
 
 echo -e ""
 echo -e "  \033[1m=================================================================\033[0m"
-echo -e "  \033[1m|        INSTALANDO \"ACTUALIZACIÓN AUTOMÁTICA PARA APT\"         |\033[0m"
+echo -e "  \033[1m|        INSTALANDO \"ACTUALIZACIÓN AUTOMÁTICA CON APT\"          |\033[0m"
 echo -e "  \033[1m=================================================================\033[0m"
 echo -e ""
 
@@ -43,7 +43,7 @@ advertencia() {
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Va a instalar el programa de \033[1mACTUALIZACIÓN AUTOMÁTICA         |\033[0m"
-    echo -e "  \033[1m|\033[0m \033[1mPARA APT\033[0m.                                                     \033[1m|\033[0m"
+    echo -e "  \033[1m|\033[0m \033[1mCON APT\033[0m.                                                      \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Esto permitirá que se actualize su sistema de forma           \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m automática a diario.                                          \033[1m|\033[0m"
@@ -59,7 +59,7 @@ advertencia() {
     
     options=("Si" "No")
     
-    source ./menu-si-no.sh
+    source ./assets/menu-si-no.sh
     select_option "${options[@]}"
     choice=$?
 
@@ -127,7 +127,7 @@ exito() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     
-    read -t 10 cerrar
+    read -t 20 cerrar
     exit
 }
 
@@ -170,7 +170,7 @@ if [[ $? != 0 ]]; then      # Capturar fallo
     fallo "\033[1;31mCreación del directorio\033[0m.    "
 fi
 
-sudo cp * /opt/apt-autoupdate
+sudo cp -r * /opt/apt-autoupdate
 sudo chmod +x /opt/apt-autoupdate/apt-autoupdate.sh /opt/apt-autoupdate/install.sh /opt/apt-autoupdate/uninstall.sh
 sudo ln -s /opt/apt-autoupdate/apt-autoupdate.sh /usr/bin/apt-autoupdate
 
