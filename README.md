@@ -14,7 +14,7 @@ Este es un pequeño script para automatizar las actualizaciones a través del ge
 
 ## INSTALACIÓN
 
-Para instalarlo descargue el [fichero zip](https://github.com/FenrirWolfwood/apt-autoupdate/archive/refs/tags/test.zip), descomprimalo y, desde una terminal o simplemente haciendo doble clic sobre el, ejecute el fichero **install.sh**.
+Para instalarlo descargue el [fichero zip](https://github.com/FenrirWolfwood/apt-autoupdate/archive/refs/tags/apt-autoupdate.zip), descomprimalo y, desde una terminal o simplemente haciendo doble clic sobre el, ejecute el fichero **install.sh**.
 
 A continuación se le abrirá una nueva ventana de terminal pidiéndole confirmación. Para continuar seleccione ![Si](assets/Si.png) y pulse Enter, o use los cursores ⇧ y ⇩ para cambiar la selección a ![No](assets/No.png) si desea salir. Seguidamente le pedirá que escriba la contraseña de **su usuario** para autorizar el proceso de instalación.
 
@@ -50,7 +50,7 @@ En el caso de que hubiera algún problema con la instalación, se borrarán los 
 
 En el caso de que el script de instalación no le funcione o simplemente prefiera hacer las cosas algo distintas, la instalación manual es bien sencilla.
 
-1. Descargue el [fichero zip](https://github.com/FenrirWolfwood/apt-autoupdate/archive/refs/tags/test.zip) y descomprimalo.
+1. Descargue el [fichero zip](https://github.com/FenrirWolfwood/apt-autoupdate/archive/refs/tags/apt-autoupdate.zip) y descomprimalo.
 
 2. Cree usted mismo la carpeta **/opt/apt-autoupdate** u otra carpeta donde usted prefiera.
 
