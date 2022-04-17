@@ -53,6 +53,12 @@ permisos() {
     echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para permitir las actualizaciones."
 
     sudo echo ""
+
+    if [[ $? != 0 ]]; then      # Capturar fallo
+        echo -e ""
+        echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+        exit
+    fi
 }
 
 exito() {
