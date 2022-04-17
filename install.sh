@@ -68,26 +68,81 @@ advertencia() {
     echo -e ""
 }
 
+clave_sudo() {
+    echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para autorizar que empiece la instalación."
+    
+    sudo echo ""
+    
+        if [[ $? != 0 ]]; then      # Capturar fallo
+            echo -e ""
+            echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+            sleep 2
+            exit
+        fi
+}
+
 previa() {
     echo -e ""
     echo -e "  \033[1m=================================================================\033[0m"
-    echo -e "  \033[1m|\033[41m                             ERROR                             \033[0m\033[1m|\033[0m"
+    echo -e "  \033[1m|\033[41m                           ATENCIÓN!                           \033[0m\033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Parece que ya existe una instalación previa.                  \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m Si esta no funciona correctamente ejecute \033[1muninstall.sh        |\033[0m"
-    echo -e "  \033[1m|\033[0m para borrarla antes de intentarla volver a instalar.          \033[1m|\033[0m"
+    echo -e "  \033[1m|\033[0m Desea \033[1mborrarla\033[0m y realizar una \033[1minstalación mueva\033[0m?              \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m---------------------------------------------------------------\033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m Presione \033[7;5;1m ENTER \033[0m o cierre la ventana para salir.              \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m=================================================================\033[0m"
-    echo -e ""
+    
+    options=("Si" "No")
+    
+    source ./assets/menu-si-no.sh
+    select_option "${options[@]}"
+    choice_previa=$?
+    
+    if [[ $choice_previa == 0 ]]; then
+        echo -e ""
+        echo -e ""
+        echo -e ""
+        uninstall
+    else
+        echo -e ""
+        echo -e ""
+        echo -e ""
+        echo -e "\033[1m Instalación cancelada.\033[0m"
+        sleep 2
+        exit
+fi
+}
 
-    read cerrar
-    exit
+uninstall() {
+    clave_sudo
+    
+    # Borrando el directorio.
+    if [[ -e /opt/apt-autoupdate ]]; then
+        echo -e "Eliminando el directorio \033[1m/opt/apt-autoupdate\033[0m y su contenido."
+        sudo rm -fr /opt/apt-autoupdate
+    else
+        echo -e "No se ha encontrado el directorio \033[1m/opt/apt-autoupdate\033[0m para poder borrarlo."
+    fi
+    
+    # Borrando el comando.
+    if [[ -L /usr/bin/apt-autoupdate ]]; then
+        echo -e "Eliminando el comando \033[1mapt-autoupdate\033[0m."
+        sudo rm -fr /usr/bin/apt-autoupdate
+    else
+        echo -e "No se ha encontrado el comando \033[1mapt-autoupdate\033[0m en su sistema."
+    fi
+    
+    # Borrando el registro de Anacron.
+    if [[ $(grep apt-autoupdate /etc/anacrontab) != "" ]]; then
+        echo -e "Borrando el registro de \033[1m/etc/anacrontab\033[0m."
+        sudo sed -i '/apt-autoupdate/d' /etc/anacrontab
+    else
+        echo -e "No se ha encontrado el registro en \033[1m/etc/anacrontab\033[0m para poder borrarlo."
+    fi
+
+    echo -e ""
 }
 
 fallo() {
@@ -107,7 +162,7 @@ fallo() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e ""
-
+    
     read cerrar
     exit
 }
@@ -135,6 +190,8 @@ exito() {
 
 #### COMPROBACIONES ####
 
+choice_previa=""
+
 # Comprovación de la existencia del directorio "/opt/apt-autoupdate".
 if [[ -e /opt/apt-autoupdate ]]; then
      previa
@@ -154,24 +211,19 @@ fi
 
 #### INSTALACIÓN ####
 
-advertencia
-
-if [[ $choice == 1 ]]; then
-    echo -e "\033[1m Instalación cancelada.\033[0m"
-    sleep 2
-    exit
-fi
-
-echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para autorizar que empiece la instalación."
-
-sudo echo ""
-
-    if [[ $? != 0 ]]; then      # Capturar fallo
-        echo -e ""
-        echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+# Evita "advertencia" si ya ha mostrado "previa".
+if [[ $choice_previa == "" ]]; then
+    advertencia
+    
+    if [[ $choice == 1 ]]; then
+        echo -e "\033[1m Instalación cancelada.\033[0m"
         sleep 2
         exit
     fi
+    
+    clave_sudo
+    
+fi
 
 # Creación del directorio y copia de los archivos.
 echo -e "Creando el directorio \033[1m\"/opt/apt-autoupdate\"\033[0m y copiando los ficheros necesarios."
@@ -191,7 +243,7 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 echo -e "Copia de ficheros realizada con exito."
-echo ""
+echo -e ""
 
 # Creación del comando.
 echo -e "Creando el comando \033[1m\"apt-autoupdate\"\033[0m en su sistema."
@@ -204,7 +256,7 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 echo -e "Creación del comando realizada con exito."
-echo ""
+echo -e ""
 
 # Programación de la taréa en /etc/anacriontab.
 echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar el sistema."

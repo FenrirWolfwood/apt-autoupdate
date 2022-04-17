@@ -27,9 +27,9 @@ $default_term '
 #### TÍTULO ####
 
 echo -e ""
-    echo -e "  \033[1m=================================================================\033[0m"
+echo -e "  \033[1m=================================================================\033[0m"
 echo -e "  \033[1m|       DESINSTALANDO \"ACTUALIZACIÓN AUTOMÁTICA CON APT\"        |\033[0m"
-    echo -e "  \033[1m=================================================================\033[0m"
+echo -e "  \033[1m=================================================================\033[0m"
 echo -e ""
 
 
@@ -60,7 +60,7 @@ advertencia() {
     source ./assets/menu-si-no.sh
     select_option "${options[@]}"
     choice=$?
-
+    
     echo -e ""
     echo -e ""
     echo -e ""
@@ -85,7 +85,7 @@ sin_previa() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e ""
-
+    
     read cerrar
     exit
 }
@@ -150,12 +150,12 @@ echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para autorizar qu
 
 sudo echo ""
 
-    if [[ $? != 0 ]]; then      # Capturar fallo
-        echo -e ""
-        echo -e "\033[1mLa contraseña no es correcta.\033[0m"
-        sleep 2
-        exit
-    fi
+if [[ $? != 0 ]]; then      # Capturar fallo
+    echo -e ""
+    echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+    sleep 2
+    exit
+fi
 
 # Borrando el directorio.
 if [[ -e /opt/apt-autoupdate ]]; then
