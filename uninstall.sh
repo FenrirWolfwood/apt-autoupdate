@@ -153,9 +153,17 @@ sudo echo ""
 # Borrando el directorio.
 if [[ -e /opt/apt-autoupdate ]]; then
     echo -e "Eliminando el directorio \033[1m/opt/apt-autoupdate\033[0m y su contenido."
-    sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
+    sudo rm -fr /opt/apt-autoupdate
 else
     echo -e "No se ha encontrado el directorio \033[1m/opt/apt-autoupdate\033[0m para poder borrarlo."
+fi
+
+# Borrando el comando.
+if [[ -e /usr/bin/apt-autoupdate ]]; then
+    echo -e "Eliminando el comando \033[1mapt-autoupdate\033[0m."
+    sudo rm -fr /usr/bin/apt-autoupdate
+else
+    echo -e "No se ha encontrado el comando \033[1mapt-autoupdate\033[0m en su sistema."
 fi
 
 # Borrando el registro de Anacron.

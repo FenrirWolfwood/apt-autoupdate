@@ -172,7 +172,6 @@ fi
 
 sudo cp -r * /opt/apt-autoupdate
 sudo chmod +x /opt/apt-autoupdate/apt-autoupdate.sh /opt/apt-autoupdate/install.sh /opt/apt-autoupdate/uninstall.sh
-sudo ln -s /opt/apt-autoupdate/apt-autoupdate.sh /usr/bin/apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
@@ -180,6 +179,19 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 echo -e "Copia de ficheros realizada con exito."
+echo ""
+
+# Creación del comando.
+echo -e "Creando el comando \033[1m\"apt-autoupdate\"\033[0m en su sistema."
+
+sudo ln -s /opt/apt-autoupdate/apt-autoupdate.sh /usr/bin/apt-autoupdate
+
+if [[ $? != 0 ]]; then      # Capturar fallo
+    sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
+    fallo "\033[1;31mCreación del comando\033[0m.      "
+fi
+
+echo -e "Creación del comando realizada con exito."
 echo ""
 
 # Programación de la taréa en /etc/anacriontab.
