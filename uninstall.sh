@@ -142,13 +142,20 @@ advertencia
 
 if [[ $choice == 1 ]]; then
     echo -e "\033[1m Desinstalación cancelada.\033[0m"
-    sleep 1
+    sleep 2
     exit
 fi
 
 echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para autorizar que empiece la desinstalación."
 
 sudo echo ""
+
+    if [[ $? != 0 ]]; then      # Capturar fallo
+        echo -e ""
+        echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+        sleep 2
+        exit
+    fi
 
 # Borrando el directorio.
 if [[ -e /opt/apt-autoupdate ]]; then

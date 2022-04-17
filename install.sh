@@ -158,13 +158,20 @@ advertencia
 
 if [[ $choice == 1 ]]; then
     echo -e "\033[1m Instalación cancelada.\033[0m"
-    sleep 1
+    sleep 2
     exit
 fi
 
 echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para autorizar que empiece la instalación."
 
 sudo echo ""
+
+    if [[ $? != 0 ]]; then      # Capturar fallo
+        echo -e ""
+        echo -e "\033[1mLa contraseña no es correcta.\033[0m"
+        sleep 2
+        exit
+    fi
 
 # Creación del directorio y copia de los archivos.
 echo -e "Creando el directorio \033[1m\"/opt/apt-autoupdate\"\033[0m y copiando los ficheros necesarios."
