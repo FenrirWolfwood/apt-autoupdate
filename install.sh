@@ -119,25 +119,25 @@ uninstall() {
     clave_sudo
     
     # Borrando el directorio.
-    if [[ -e /opt/apt-autoupdate ]]; then
-        echo -e "Eliminando el directorio \033[1m/opt/apt-autoupdate\033[0m y su contenido."
-        sudo rm -fr /opt/apt-autoupdate
+    if [[ -e /opt/daily-apt-autoupdate ]]; then
+        echo -e "Eliminando el directorio \033[1m/opt/daily-apt-autoupdate\033[0m y su contenido."
+        sudo rm -fr /opt/daily-apt-autoupdate
     else
-        echo -e "No se ha encontrado el directorio \033[1m/opt/apt-autoupdate\033[0m para poder borrarlo."
+        echo -e "No se ha encontrado el directorio \033[1m/opt/daily-apt-autoupdate\033[0m para poder borrarlo."
     fi
     
     # Borrando el comando.
-    if [[ -L /usr/bin/apt-autoupdate ]]; then
-        echo -e "Eliminando el comando \033[1mapt-autoupdate\033[0m."
-        sudo rm -fr /usr/bin/apt-autoupdate
+    if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
+        echo -e "Eliminando el comando \033[1mdaily-apt-autoupdate\033[0m."
+        sudo rm -fr /usr/bin/daily-apt-autoupdate
     else
-        echo -e "No se ha encontrado el comando \033[1mapt-autoupdate\033[0m en su sistema."
+        echo -e "No se ha encontrado el comando \033[1mdaily-apt-autoupdate\033[0m en su sistema."
     fi
     
     # Borrando el registro de Anacron.
-    if [[ $(grep apt-autoupdate /etc/anacrontab) != "" ]]; then
+    if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
         echo -e "Borrando el registro de \033[1m/etc/anacrontab\033[0m."
-        sudo sed -i '/apt-autoupdate/d' /etc/anacrontab
+        sudo sed -i "/daily-apt-autoupdate/d" /etc/anacrontab
     else
         echo -e "No se ha encontrado el registro en \033[1m/etc/anacrontab\033[0m para poder borrarlo."
     fi
@@ -192,18 +192,18 @@ exito() {
 
 choice_previa=""
 
-# Comprovación de la existencia del directorio "/opt/apt-autoupdate".
-if [[ -e /opt/apt-autoupdate ]]; then
+# Comprovación de la existencia del directorio "/opt/daily-apt-autoupdate".
+if [[ -e /opt/daily-apt-autoupdate ]]; then
      previa
 fi
 
-# Comprovación de la existencia del enlace en "/usr/bin/apt-autoupdate".
-if [[ -L /usr/bin/apt-autoupdate ]]; then
+# Comprovación de la existencia del enlace en "/usr/bin/daily-apt-autoupdate".
+if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
      previa
 fi
 
 # Comprovación de la existencia del registro en "/etc/anacrontab".
-if [[ $(grep apt-autoupdate /etc/anacrontab) != "" ]]; then
+if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
     previa
 fi
 
@@ -226,19 +226,19 @@ if [[ $choice_previa == "" ]]; then
 fi
 
 # Creación del directorio y copia de los archivos.
-echo -e "Creando el directorio \033[1m\"/opt/apt-autoupdate\"\033[0m y copiando los ficheros necesarios."
+echo -e "Creando el directorio \033[1m\"/opt/daily-apt-autoupdate\"\033[0m y copiando los ficheros necesarios."
 
-sudo mkdir /opt/apt-autoupdate
+sudo mkdir /opt/daily-apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo "\033[1;31mCreación del directorio\033[0m.    "
 fi
 
-sudo cp -r * /opt/apt-autoupdate
-sudo chmod +x /opt/apt-autoupdate/apt-autoupdate.sh /opt/apt-autoupdate/install.sh /opt/apt-autoupdate/uninstall.sh
+sudo cp -r * /opt/daily-apt-autoupdate
+sudo chmod +x /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh /opt/daily-apt-autoupdate/install.sh /opt/daily-apt-autoupdate/uninstall.sh
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
+    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
     fallo "\033[1;31mCopia de los ficheros\033[0m.      "
 fi
 
@@ -246,12 +246,12 @@ echo -e "Copia de ficheros realizada con exito."
 echo -e ""
 
 # Creación del comando.
-echo -e "Creando el comando \033[1m\"apt-autoupdate\"\033[0m en su sistema."
+echo -e "Creando el comando \033[1m\"daily-apt-autoupdate\"\033[0m en su sistema."
 
-sudo ln -s /opt/apt-autoupdate/apt-autoupdate.sh /usr/bin/apt-autoupdate
+sudo ln -s /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh /usr/bin/daily-apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
+    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
     fallo "\033[1;31mCreación del comando\033[0m.      "
 fi
 
@@ -261,10 +261,10 @@ echo -e ""
 # Programación de la taréa en /etc/anacriontab.
 echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar el sistema."
 
-echo -e "1	3	apt-autoupdate	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && /opt/apt-autoupdate/apt-autoupdate.sh" | sudo tee -a /etc/anacrontab > /dev/null
+echo -e "1	3	daily-apt-autoupdate	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh" | sudo tee -a /etc/anacrontab > /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/apt-autoupdate /usr/bin/apt-autoupdate
+    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
     fallo "\033[1;31mIncluir tarea en anacrontab\033[0m."
 fi
 
