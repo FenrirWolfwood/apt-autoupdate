@@ -128,7 +128,7 @@ if [[ $(grep apt-autoupdate /etc/anacrontab) != "" ]]; then
 fi
 
 # Comprovación de la existencia del enlace en "/usr/bin/apt-autoupdate".
-if [[ -e /usr/bin/apt-autoupdate ]]; then
+if [[ -L /usr/bin/apt-autoupdate ]]; then
      comando=1
 fi
 
@@ -159,7 +159,7 @@ else
 fi
 
 # Borrando el comando.
-if [[ -e /usr/bin/apt-autoupdate ]]; then
+if [[ -L /usr/bin/apt-autoupdate ]]; then
     echo -e "Eliminando el comando \033[1mapt-autoupdate\033[0m."
     sudo rm -fr /usr/bin/apt-autoupdate
 else

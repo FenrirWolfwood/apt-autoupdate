@@ -140,6 +140,11 @@ if [[ -e /opt/apt-autoupdate ]]; then
      previa
 fi
 
+# Comprovación de la existencia del enlace en "/usr/bin/apt-autoupdate".
+if [[ -L /usr/bin/apt-autoupdate ]]; then
+     previa
+fi
+
 # Comprovación de la existencia del registro en "/etc/anacrontab".
 if [[ $(grep apt-autoupdate /etc/anacrontab) != "" ]]; then
     previa
