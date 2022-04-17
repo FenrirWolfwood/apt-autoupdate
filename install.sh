@@ -3,22 +3,7 @@
 
 
 # Permite que el script se ejecute en su propia ventana de terminal con un simple doble click.
-
-default_term="N/A"
-
-for terminal in "$TERMINAL" x-terminal-emulator mate-terminal gnome-terminal terminator xfce4-terminal urxvt rxvt termit Eterm aterm uxterm xterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix konsole kitty guake tilda alacritty hyper; do
-    if command -v "$terminal" > /dev/null 2>&1; then
-        default_term="$terminal"
-    fi
-done
-
-if [[ $default_term == "xfce4-terminal" ]];then
-    default_term="xfce4-terminal --hide-menubar -x bash -ic"
-elif [[ $default_term == "terminator" ]];then
-    default_term="$default_term -x bash -ic"
-else
-    default_term="$default_term -e bash -ic"
-fi
+source ./assets/default-term.sh
 
 $default_term '
 
@@ -261,7 +246,8 @@ echo -e ""
 # Programación de la taréa en /etc/anacriontab.
 echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar el sistema."
 
-echo -e "1	3	daily-apt-autoupdate	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh" | sudo tee -a /etc/anacrontab > /dev/null
+source ./assets/default-term.sh
+echo -e "1	3	daily-apt-autoupdate	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && $default_term /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate

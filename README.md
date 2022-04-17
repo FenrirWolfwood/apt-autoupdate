@@ -56,17 +56,19 @@ En el caso de que el script de instalación no le funcione o simplemente prefier
 
 3. Copie todos los ficheros en dicha carpeta y asegúrese de que el fichero **daily-apt-autoupdate.sh** sea ejecutable.
 
-4. Edite el fichero **/etc/anacrontab** y añada al final la siguiente linea:
+4. Para programar la tarea en **Anacron** deberá ejecutar lo siguiente desde su terminal de comandos, le pedirá la contraseña de su usuario para autorizar el cambio:
    
-   ```
-   1    3    daily-apt-autoupdate    export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh
+   ```bash
+   cd /opt/daily-apt-autoupdate
+   source ./assets/default-term.sh
+   echo -e "1  3   daily-apt-autoupdate    export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && $default_term /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
    ```
    
-   **IMPORTANTE:** Si ha decidido utilizar una carpeta distinta de _/opt/daily-apt-autoupdate_ tendrá que cambiar la ruta de la carpeta al final de este comando.
+   **IMPORTANTE:** Si ha decidido utilizar una carpeta distinta de _/opt/daily-apt-autoupdate_ tendrá que cambiar la ruta de la carpeta en este comando.
 
 5. OPCIONAL: Si lo desea, puede crear un enlace al fichero _daily-apt-autoupdate.sh_ en la carpeta _/usr/bin_ para poder ejecutar el script de forma manual cuando lo desee simplemente escribiendo el comando `daily-apt-autoupdate` en su teminal.
    
-   ```
+   ```bash
    sudo ln -s /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh /usr/bin/daily-apt-autoupdate   
    ```
 
