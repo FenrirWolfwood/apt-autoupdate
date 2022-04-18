@@ -26,7 +26,11 @@ A continuación se le abrirá una nueva ventana de terminal pidiéndole confirma
 
 <br />
 
-Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/daily-apt-autoupdate_, se copiarán todos los ficheros en ella y se programará en _Anacron_ que se pasen las actualizaciones del sistema diariamente. Si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un tiempo si no la ha cerrado usted antes.
+Tras escribir su contraseña, se creará una carpeta en su sistema en _/opt/daily-apt-autoupdate_, se copiarán todos los ficheros en ella y se programará en _Anacron_ que se pasen las actualizaciones del sistema diariamente. Si todo ha ido bien le mostrará un mensaje informándole de ello y pasado un minuto se cerrará la ventana si no la ha cerrado usted antes.
+
+\* Si desea revisar el proceso puede pulsar **ESC** para evitar que la ventana se cierre.
+
+\*\* En la ventana de actualizaciones, el tiempo de espera antes de que se cierre sola si no ha pulsado **ESC**, es de 20 segundos para que no resulte molesta al tratarse de un proceso diario.
 
 <br />
 
@@ -80,7 +84,9 @@ Con estos pasos la instalación estaría terminada y ya puede borrar los fichero
 
 Si decide utilizar los servicios de actualización automática que le ofrezca su distribución GNU/Linux o tal vez encargarse usted mismo de ello, puede desinstalar este mini-programa simplemente ejecutando el script **uninstall.sh** y siguiendo los pasos al igual que con el de instalación.
 
-Este script eliminará la carpeta en _/opt/daily-apt-autoupdate_ junto con su contenido y borrará la tarea programada creada en _Anacron_. Igual que en la instalación, si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un tiempo si no la ha cerrado usted antes.
+Este script eliminará la carpeta en _/opt/daily-apt-autoupdate_ junto con su contenido y borrará la tarea programada creada en _Anacron_. Igual que en la instalación, si todo ha ido bien le mostrará un mensaje informándole de ello y se cerrará la ventana pasado un minuto si no la ha cerrado usted antes.
+
+\* Si desea revisar el proceso puede pulsar **ESC** para evitar que la ventana se cierre.
 
 En el caso de que hubiera algún problema con la desinstalación, le saldrá un mensaje informándole de cual ha sido el problema y la ventana permanecerá abierta hasta que usted pueda ver el mensaje y la cierre.
 

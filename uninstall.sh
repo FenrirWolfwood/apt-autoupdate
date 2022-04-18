@@ -89,9 +89,29 @@ exito() {
     echo -e "  \033[1m|\033[0m Presione \033[7;5;1m ENTER \033[0m o cierre la ventana para salir.              \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
+    echo -e ""
+    echo -e "  * Presione \033[1mESC\033[0m para evitar que esta ventana se cierre dentro de 1 minuto."
+    echo -e ""
     
-    read -t 60 cerrar
-    exit
+    t_now=$(date +%s)
+    t_end=$(date --date="+60 sec" +%s)
+    
+    while [ $t_now -lt $t_end ]; do
+        IFS=""
+        read -sn 1 -t $(($t_end - $t_now)) cerrar
+        
+        case $cerrar in
+            $'\e')
+                echo -e "  Cuando haya terminado presione \033[1mENTER\033[0m para salir."
+                read cerrar
+                exit ;;
+            "")
+                exit ;;
+            *)
+                : ;;
+        esac
+        t_now=$(date +%s)
+    done
 }
 
 
