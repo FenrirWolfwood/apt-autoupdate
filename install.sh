@@ -69,7 +69,7 @@ previa() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m Parece que ya existe una instalación previa.                  \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m Desea \033[1mborrarla\033[0m y realizar una \033[1minstalación mueva\033[0m?              \033[1m|\033[0m"
+    echo -e "  \033[1m|\033[0m Desea \033[1mborrarla\033[0m y realizar una \033[1minstalación nueva\033[0m?              \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m---------------------------------------------------------------\033[1m|\033[0m"
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
