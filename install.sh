@@ -2,12 +2,7 @@
 
 
 
-# Permite que el script se ejecute en su propia ventana de terminal con un simple doble click.
-source ./assets/default-term.sh
-
-$default_term '
-
-
+install() {
 
 #### TÍTULO ####
 
@@ -279,4 +274,11 @@ echo -e "El registro ha sido añadido a \033[1m/etc/anacrontab\033[0m con exito.
 exito
 
 #### FIN ####
-'
+}
+
+
+
+# Permite que el script se ejecute en su propia ventana de terminal con un simple doble click.
+source ./assets/default-term.sh
+export -f install
+$($default_term 'install')
