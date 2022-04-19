@@ -113,7 +113,7 @@ fi
 ping -c 1 linux.org &> /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    fallo "    \033[7;1m \"UPDATE\" \033[0m  " " o a la       \033[1m|\n  | \033[31mfalta de conexión a internet\033[0m.                    "
+    fallo "    \033[7;1m \"UPDATE\" \033[0m  " " o a la       \033[1m|\n  | \033[31mfalta de conexión a internet\033[0m.                                 \033[1m|\n  |                                                               |\n  |\033[0m Puede ejecutar nuevamente este programa escribiendo           \033[1m|\n  | daily-apt-autoupdate\033[0m en una terminal.            "
 fi
 
 
@@ -123,7 +123,7 @@ fi
 echo -e "    \033[1m==== UPDATE ====\033[0m"
 echo -e ""
 
-#sudo apt update 2> /dev/null
+sudo apt update 2> /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo "    \033[7;1m \"UPDATE\" \033[0m  " "."
@@ -133,7 +133,7 @@ echo -e ""
 echo -e "    \033[1m==== FULL-UPGRADE ====\033[0m"
 echo -e ""
 
-#sudo apt full-upgrade -y 2> /dev/null
+sudo apt full-upgrade -y 2> /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo "\033[7;1m \"FULL-UPGRADE\" \033[0m" "."
@@ -143,7 +143,7 @@ echo -e ""
 echo -e "    \033[1m==== AUTOREMOVE ====\033[0m"
 echo -e ""
 
-#sudo apt autoremove --purge -y 2> /dev/null
+sudo apt autoremove --purge -y 2> /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo " \033[7;1m \"AUTOREMOVE\" \033[0m " "."
@@ -153,7 +153,7 @@ echo -e ""
 echo -e "    \033[1m==== AUTOCLEAN ====\033[0m"
 echo -e ""
 
-#sudo apt autoclean 2> /dev/null
+sudo apt autoclean 2> /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo " \033[7;1m \"AUTOCLEAN\" \033[0m  " "."
