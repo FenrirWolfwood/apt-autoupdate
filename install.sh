@@ -281,4 +281,9 @@ exito
 # Permite que el script se ejecute en su propia ventana de terminal con un simple doble click.
 source ./assets/default-term.sh
 export -f install
-$default_term install
+
+if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; then
+    install
+else
+    $default_term install
+fi
