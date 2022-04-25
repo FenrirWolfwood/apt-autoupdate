@@ -13,7 +13,7 @@ for terminal in "$TERMINAL" x-terminal-emulator mate-terminal gnome-terminal ter
 done
 
 if [[ $default_term == "xfce4-terminal" ]];then
-    default_term="xfce4-terminal --hide-menubar -x bash -ic"
+    default_term="xfce4-terminal --disable-server --hide-menubar -x bash -ic"
 elif [[ $default_term == "konsole" ]];then
     default_term="konsole --hide-menubar -e bash -ic"
 elif [[ $default_term == "terminator" ]];then
