@@ -7,11 +7,22 @@
 
 default_term="N/A"
 
-for terminal in "$TERMINAL" yakuake guake tilda x-terminal-emulator terminator urxvt rxvt termit Eterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix kitty alacritty hyper xterm uxterm aterm mate-terminal xfce4-terminal konsole gnome-terminal; do
-    if command -v "$terminal" > /dev/null 2>&1; then
-        default_term="$terminal"
-    fi
-done
+case $XDG_CURRENT_DESKTOP in
+    "GNOME")
+        default_term="gnome-terminal" ;;
+    "KDE")
+        default_term="konsole" ;;
+    "XFCE")
+        default_term="xfce4-terminal" ;;
+    "X-Cinnamon")
+        default_term="gnome-terminal" ;;
+    *)
+        for terminal in "$TERMINAL" yakuake guake tilda terminator urxvt rxvt termit Eterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix kitty alacritty hyper xterm uxterm aterm mate-terminal xfce4-terminal konsole gnome-terminal x-terminal-emulator; do
+            if command -v "$terminal" > /dev/null 2>&1; then
+                default_term="$terminal"
+            fi
+        done ;;
+esac
 
 if [[ $default_term == "konsole" ]]; then
     default_term="konsole --hide-menubar -p tabtitle=daily-apt-autoupdate -e bash -ic"
