@@ -7,7 +7,7 @@
 
 default_term="N/A"
 
-for terminal in "$TERMINAL" guake tilda x-terminal-emulator terminator urxvt rxvt termit Eterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix kitty alacritty hyper xterm uxterm aterm mate-terminal xfce4-terminal konsole gnome-terminal; do
+for terminal in "$TERMINAL" yakuake guake tilda x-terminal-emulator terminator urxvt rxvt termit Eterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix kitty alacritty hyper xterm uxterm aterm mate-terminal xfce4-terminal konsole gnome-terminal; do
     if command -v "$terminal" > /dev/null 2>&1; then
         default_term="$terminal"
     fi
