@@ -8,7 +8,7 @@
 default_term="N/A"
 
 case $XDG_CURRENT_DESKTOP in
-    "GNOME")
+    *"GNOME"*)
         default_term="gnome-terminal" ;;
     "KDE")
         default_term="konsole" ;;

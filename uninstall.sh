@@ -192,8 +192,8 @@ exito
 source ./assets/default-term.sh
 export -f uninstall
 
-if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; then
-    install
+if [[ $XDG_CURRENT_DESKTOP == *"GNOME"* ||  $XDG_CURRENT_DESKTOP == *"XFCE"* ]]; then
+    uninstall
 else
-    $default_term install
+    $default_term uninstall
 fi

@@ -282,7 +282,7 @@ exito
 source ./assets/default-term.sh
 export -f install
 
-if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; then
+if [[ $XDG_CURRENT_DESKTOP == *"GNOME"* || $XDG_CURRENT_DESKTOP == *"XFCE"*  ]]; then
     install
 else
     $default_term install
