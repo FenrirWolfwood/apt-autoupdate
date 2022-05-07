@@ -292,7 +292,7 @@ fi
 echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar sesión con su usuario."
 
 source ./assets/default-term.sh
-echo -e "1	3	daily-apt-autoupdate-$USER	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && $default_term $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
+echo -e "1	3	daily-apt-autoupdate-$USER	export DISPLAY=$DISPLAY XAUTHORITY=$HOME/.Xauthority HOME=$HOME USER=$USER GROUP=$(id -gn) && $default_term $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     rm -fr $HOME/.local/share/daily-apt-autoupdate $HOME/.local/bin/daily-apt-autoupdate
