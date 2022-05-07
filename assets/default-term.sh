@@ -10,11 +10,11 @@ default_term="N/A"
 case $XDG_CURRENT_DESKTOP in
     *"GNOME"*)
         default_term="gnome-terminal" ;;
-    "KDE")
+    *"KDE"*)
         default_term="konsole" ;;
-    "XFCE")
+    *"XFCE"*)
         default_term="xfce4-terminal" ;;
-    "X-Cinnamon")
+    *"Cinnamon"*)
         default_term="gnome-terminal" ;;
     *)
         for terminal in "$TERMINAL" yakuake guake tilda terminator urxvt rxvt termit Eterm roxterm termite lxterminal terminology st qterminal lilyterm tilix terminix kitty alacritty hyper xterm uxterm aterm mate-terminal xfce4-terminal konsole gnome-terminal x-terminal-emulator; do

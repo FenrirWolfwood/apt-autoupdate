@@ -117,18 +117,18 @@ directorio=0
 anacron_reg=0
 comando=0
 
-# Comprovación de la existencia del directorio "/opt/daily-apt-autoupdate".
-if [[ -e /opt/daily-apt-autoupdate ]]; then
+# Comprovación de la existencia del directorio "$HOME/.local/share/daily-apt-autoupdate".
+if [[ -e $HOME/.local/share/daily-apt-autoupdate ]]; then
      directorio=1
 fi
 
 # Comprovación de la existencia del registro en "/etc/anacrontab".
-if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
+if [[ $(grep daily-apt-autoupdate-$USER /etc/anacrontab) != "" ]]; then
     anacron_reg=1
 fi
 
-# Comprovación de la existencia del enlace en "/usr/bin/daily-apt-autoupdate".
-if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
+# Comprovación de la existencia del enlace en "$HOME/.local/bin/daily-apt-autoupdate".
+if [[ -L $HOME/.local/bin/daily-apt-autoupdate ]]; then
      comando=1
 fi
 
@@ -158,27 +158,27 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 # Borrando el directorio.
-if [[ -e /opt/daily-apt-autoupdate ]]; then
-    echo -e "Eliminando el directorio \033[1m/opt/daily-apt-autoupdate\033[0m y su contenido."
-    sudo rm -fr /opt/daily-apt-autoupdate
+if [[ -e $HOME/.local/share/daily-apt-autoupdate ]]; then
+    echo -e "Eliminando el directorio \033[1m$HOME/.local/share/daily-apt-autoupdate\033[0m y su contenido."
+    rm -fr $HOME/.local/share/daily-apt-autoupdate
 else
-    echo -e "No se ha encontrado el directorio \033[1m/opt/daily-apt-autoupdate\033[0m para poder borrarlo."
-fi
-
-# Borrando el comando.
-if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
-    echo -e "Eliminando el comando \033[1mdaily-apt-autoupdate\033[0m."
-    sudo rm -fr /usr/bin/daily-apt-autoupdate
-else
-    echo -e "No se ha encontrado el comando \033[1mdaily-apt-autoupdate\033[0m en su sistema."
+    echo -e "No se ha encontrado el directorio \033[1m$HOME/.local/share/daily-apt-autoupdate\033[0m para poder borrarlo."
 fi
 
 # Borrando el registro de Anacron.
-if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
-    echo -e "Borrando el registro de \033[1m/etc/anacrontab\033[0m."
-    sudo sed -i "/daily-apt-autoupdate/d" /etc/anacrontab
+if [[ $(grep daily-apt-autoupdate-$USER /etc/anacrontab) != "" ]]; then
+    echo -e "Borrando el registro del usuario \033[1m$USER\033[0m en \033[1m/etc/anacrontab\033[0m."
+    sudo sed -i "/daily-apt-autoupdate-$USER/d" /etc/anacrontab
 else
     echo -e "No se ha encontrado el registro en \033[1m/etc/anacrontab\033[0m para poder borrarlo."
+fi
+
+# Borrando el comando.
+if [[ -L $HOME/.local/bin/daily-apt-autoupdate ]]; then
+    echo -e "Eliminando el comando \033[1mdaily-apt-autoupdate\033[0m de su usuario."
+    rm $HOME/.local/bin/daily-apt-autoupdate
+else
+    echo -e "No se ha encontrado el comando \033[1mdaily-apt-autoupdate\033[0m en su usuario."
 fi
 
 exito

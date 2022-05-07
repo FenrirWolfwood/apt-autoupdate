@@ -99,29 +99,29 @@ uninstall() {
     clave_sudo
     
     # Borrando el directorio.
-    if [[ -e /opt/daily-apt-autoupdate ]]; then
-        echo -e "Eliminando el directorio \033[1m/opt/daily-apt-autoupdate\033[0m y su contenido."
-        sudo rm -fr /opt/daily-apt-autoupdate
+    if [[ -e $HOME/.local/share/daily-apt-autoupdate ]]; then
+        echo -e "Eliminando el directorio \033[1m$HOME/.local/share/daily-apt-autoupdate\033[0m y su contenido."
+        rm -fr $HOME/.local/share/daily-apt-autoupdate
     else
-        echo -e "No se ha encontrado el directorio \033[1m/opt/daily-apt-autoupdate\033[0m para poder borrarlo."
-    fi
-    
-    # Borrando el comando.
-    if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
-        echo -e "Eliminando el comando \033[1mdaily-apt-autoupdate\033[0m."
-        sudo rm -fr /usr/bin/daily-apt-autoupdate
-    else
-        echo -e "No se ha encontrado el comando \033[1mdaily-apt-autoupdate\033[0m en su sistema."
+        echo -e "No se ha encontrado el directorio \033[1m$HOME/.local/share/daily-apt-autoupdate\033[0m para poder borrarlo."
     fi
     
     # Borrando el registro de Anacron.
-    if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
-        echo -e "Borrando el registro de \033[1m/etc/anacrontab\033[0m."
-        sudo sed -i "/daily-apt-autoupdate/d" /etc/anacrontab
+    if [[ $(grep daily-apt-autoupdate-$USER /etc/anacrontab) != "" ]]; then
+        echo -e "Borrando el registro del usuario \033[1m$USER\033[0m en \033[1m/etc/anacrontab\033[0m."
+        sudo sed -i "/daily-apt-autoupdate-$USER/d" /etc/anacrontab
     else
-        echo -e "No se ha encontrado el registro en \033[1m/etc/anacrontab\033[0m para poder borrarlo."
+        echo -e "No se ha encontrado el registro del usuario \033[1m$USER\033[0m en \033[1m/etc/anacrontab\033[0m para poder borrarlo."
     fi
 
+    # Borrando el comando.
+    if [[ -L $HOME/.local/bin/daily-apt-autoupdate ]]; then
+        echo -e "Eliminando el comando \033[1mdaily-apt-autoupdate\033[0m de su usuario."
+        rm $HOME/.local/bin/daily-apt-autoupdate
+    else
+        echo -e "No se ha encontrado el comando \033[1mdaily-apt-autoupdate\033[0m en su usuario."
+    fi
+    
     echo -e ""
 }
 
@@ -192,18 +192,18 @@ exito() {
 
 choice_previa=""
 
-# Comprovación de la existencia del directorio "/opt/daily-apt-autoupdate".
-if [[ -e /opt/daily-apt-autoupdate ]]; then
+# Comprovación de la existencia del directorio "$HOME/.local/share/daily-apt-autoupdate".
+if [[ -e $HOME/.local/share/daily-apt-autoupdate ]]; then
      previa
 fi
 
-# Comprovación de la existencia del enlace en "/usr/bin/daily-apt-autoupdate".
-if [[ -L /usr/bin/daily-apt-autoupdate ]]; then
+# Comprovación de la existencia del enlace en "$HOME/.local/bin/daily-apt-autoupdate".
+if [[ -L $HOME/.local/bin/daily-apt-autoupdate ]]; then
      previa
 fi
 
 # Comprovación de la existencia del registro en "/etc/anacrontab".
-if [[ $(grep daily-apt-autoupdate /etc/anacrontab) != "" ]]; then
+if [[ $(grep daily-apt-autoupdate-$USER /etc/anacrontab) != "" ]]; then
     previa
 fi
 
@@ -226,19 +226,19 @@ if [[ $choice_previa == "" ]]; then
 fi
 
 # Creación del directorio y copia de los archivos.
-echo -e "Creando el directorio \033[1m\"/opt/daily-apt-autoupdate\"\033[0m y copiando los ficheros necesarios."
+echo -e "Creando el directorio \033[1m$HOME/.local/share/daily-apt-autoupdate\033[0m y copiando en el los ficheros necesarios."
 
-sudo mkdir /opt/daily-apt-autoupdate
+mkdir -p $HOME/.local/share/daily-apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     fallo "\033[1;31mCreación del directorio\033[0m.    "
 fi
 
-sudo cp -r * /opt/daily-apt-autoupdate
-sudo chmod +x /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh /opt/daily-apt-autoupdate/install.sh /opt/daily-apt-autoupdate/uninstall.sh
+cp -r * $HOME/.local/share/daily-apt-autoupdate
+chmod +x $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh $HOME/.local/share/daily-apt-autoupdate/install.sh $HOME/.local/share/daily-apt-autoupdate/uninstall.sh
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
+    rm -fr $HOME/.local/share/daily-apt-autoupdate
     fallo "\033[1;31mCopia de los ficheros\033[0m.      "
 fi
 
@@ -246,30 +246,60 @@ echo -e "Copia de ficheros realizada con exito."
 echo -e ""
 
 # Creación del comando.
-echo -e "Creando el comando \033[1m\"daily-apt-autoupdate\"\033[0m en su sistema."
+echo -e "Creando el comando \033[1mdaily-apt-autoupdate\033[0m para su usuario."
 
-sudo ln -s /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh /usr/bin/daily-apt-autoupdate
+if [[ ! -e $HOME/.local/bin ]]; then
+    mkdir -p $HOME/.local/bin
+fi
+
+ln -s $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh $HOME/.local/bin/daily-apt-autoupdate
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
+    rm -fr $HOME/.local/share/daily-apt-autoupdate
     fallo "\033[1;31mCreación del comando\033[0m.      "
 fi
 
 echo -e "Creación del comando realizada con exito."
 echo -e ""
 
+# Creación del comando: Ajuste para que funcione correctamente en KDE Plasma ya que parece que no ejecuta bien ~/.profile y no añade automáticamente ~/.local/bin al PATH.
+
+if [[ $XDG_CURRENT_DESKTOP == *"KDE"* && ! -e $HOME/.config/plasma-workspace/env/path.sh ]]; then
+    echo -e "
+# This file is needed because ~/.profile doesn't seem to run properly on KDE Plasma.
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+" > $HOME/.config/plasma-workspace/env/path.sh
+fi
+
 # Programación de la taréa en /etc/anacriontab.
-echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar el sistema."
+echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar sesión con su usuario."
 
 source ./assets/default-term.sh
-echo -e "1	3	daily-apt-autoupdate	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && $default_term /opt/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
+echo -e "1	3	daily-apt-autoupdate-$USER	export DISPLAY=$DISPLAY && export XAUTHORITY=$HOME/.Xauthority && $default_term $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
-    sudo rm -fr /opt/daily-apt-autoupdate /usr/bin/daily-apt-autoupdate
+    rm -fr $HOME/.local/share/daily-apt-autoupdate $HOME/.local/bin/daily-apt-autoupdate
     fallo "\033[1;31mIncluir tarea en anacrontab\033[0m."
 fi
 
-echo -e "El registro ha sido añadido a \033[1m/etc/anacrontab\033[0m con exito."
+echo -e "El registro ha sido añadido a /etc/anacrontab con exito."
 
 exito
 
