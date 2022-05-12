@@ -303,6 +303,7 @@ echo -e "El registro ha sido añadido a /etc/anacrontab con exito."
 
 # Corrección detectada para Ubuntu 22.04 LTS: Falta el paquete "dbus-x11" y por ese motivo Anacron no logra lanzar la ventada de gnome-terminal como root.
 if [[ $(dpkg -l | grep dbus-x11) == "" ]]; then
+    echo -e "El paquete necesario \033[1mdbus-x11\033[0m no se ha encintrado en su sistema y se procede a instalarlo."
     sudo apt install dbus-x11 &> /dev/null
     fi
 
