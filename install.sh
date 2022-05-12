@@ -292,7 +292,7 @@ fi
 echo -e "Incluyendo el registro en \033[1mAnacron\033[0m para que se ejecute el script \033[1mdiariamente\033[0m a los 3 min de iniciar sesión con su usuario."
 
 source ./assets/default-term.sh
-echo -e "1	3	daily-apt-autoupdate-$USER	export DISPLAY=$DISPLAY XAUTHORITY=$HOME/.Xauthority HOME=$HOME USER=$USER GROUP=$(id -gn) && $default_term $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
+echo -e "1	3	daily-apt-autoupdate-$USER	export DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY HOME=$HOME USER=$USER GROUP=$(id -gn) && $default_term $HOME/.local/share/daily-apt-autoupdate/daily-apt-autoupdate.sh &" | sudo tee -a /etc/anacrontab > /dev/null
 
 if [[ $? != 0 ]]; then      # Capturar fallo
     rm -fr $HOME/.local/share/daily-apt-autoupdate $HOME/.local/bin/daily-apt-autoupdate
@@ -300,6 +300,11 @@ if [[ $? != 0 ]]; then      # Capturar fallo
 fi
 
 echo -e "El registro ha sido añadido a /etc/anacrontab con exito."
+
+# Corrección detectada para Ubuntu 22.04 LTS: Falta el paquete "dbus-x11" y por ese motivo Anacron no logra lanzar la ventada de gnome-terminal como root.
+if [[ $(dpkg -l | grep dbus-x11) == "" ]]; then
+    sudo apt install dbus-x11 &> /dev/null
+    fi
 
 exito
 
