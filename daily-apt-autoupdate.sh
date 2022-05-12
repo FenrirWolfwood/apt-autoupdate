@@ -116,7 +116,7 @@ log_activity(){
     
     # Verificación del tamaño del log (máximo 30 registros).
     if [[ $(wc -l < $HOME/.local/share/daily-apt-autoupdate/activity.log) -ge 33 ]]; then
-        sed -i 4d $HOME/.local/share/daily-apt-autoupdate/activity.log
+        sed -i 4,$(($(wc -l < $HOME/.local/share/daily-apt-autoupdate/activity.log) - 30))d $HOME/.local/share/daily-apt-autoupdate/activity.log
     fi
     
     # Registro de actividad.
