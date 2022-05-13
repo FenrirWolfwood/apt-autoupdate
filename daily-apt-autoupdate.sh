@@ -44,14 +44,6 @@ fallo() {
 }
 
 permisos() {
-    echo -e "  \033[1m=================================================================\033[0m"
-    echo -e "  \033[1m|\033[41m                       ERROR DE PERMISOS                       \033[0m\033[1m|\033[0m"
-    echo -e "  \033[1m=================================================================\033[0m"
-    echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m Necesita ejecutar este fichero como \033[1mSUDO\033[0m.                     \033[1m|\033[0m"
-    echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
-    echo -e "  \033[1m=================================================================\033[0m"
-    echo -e ""
     echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para permitir las actualizaciones."
 
     sudo echo ""
