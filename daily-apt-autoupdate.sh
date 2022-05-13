@@ -9,6 +9,7 @@ echo -e ""
     echo -e "  \033[1m|               ACTUALIZACIÓN AUTOMÁTICA CON APT                |\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
 echo -e "   version 1.1.0"
+echo -e ""
 
 
 
