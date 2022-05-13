@@ -10,11 +10,11 @@ Este es un pequeño programa para automatizar las actualizaciones a través del 
 
 + [Instalación](#INSTALACIÓN)
   
-  - [Instalación manual](#INSTALACIÓN MANUAL)
+  - [Instalación manual](#INSTALACIÓN-MANUAL)
 
 + [Desinstalación](#DESINSTALACIÓN)
   
-  - [Desinstalación manual](#DESINSTALACIÓN MANUAL)
+  - [Desinstalación manual](#DESINSTALACIÓN-MANUAL)
 
 ____
 
