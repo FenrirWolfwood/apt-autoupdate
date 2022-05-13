@@ -43,7 +43,7 @@ En la carpeta del programa (_~/.local/share/daily-apt-autoupdate_) encontrará t
 
 ## INSTALACIÓN
 
-Para instalar el programa descargue el [fichero zip](https://github.com/FenrirWolfwood/daily-apt-autoupdate/archive/refs/tags/V1.1.0.zip), descomprímalo y ejecute el fichero **install.sh** simplemente haciendo doble clic sobre el, desde el menú contextual, o desde una terminal.
+Para instalar el programa descargue el [fichero zip](https://github.com/FenrirWolfwood/daily-apt-autoupdate/archive/refs/tags/v1.1.0.zip), descomprímalo y ejecute el fichero **install.sh** simplemente haciendo doble clic sobre el, desde el menú contextual, o desde una terminal.
 
 A continuación se le abrirá una nueva ventana de terminal pidiéndole confirmación. Para continuar seleccione **<span style="color:lightgreen">Si</span>** y pulse **Enter**, o use los cursores **⇧** y **⇩** para cambiar la selección a **<span style="color:red">No</span>** si desea salir.
 
@@ -85,7 +85,7 @@ En el caso de que hubiera algún problema con la instalación, se borrarán los 
 
 En el caso de que el script de instalación no le funcione o simplemente prefiera hacer una instalación personalizada, la instalación manual es bien sencilla.
 
-1. Descargue el [fichero zip](https://github.com/FenrirWolfwood/daily-apt-autoupdate/archive/refs/tags/V1.1.0.zip) y descomprímalo.
+1. Descargue el [fichero zip](https://github.com/FenrirWolfwood/daily-apt-autoupdate/archive/refs/tags/v1.1.0.zip) y descomprímalo.
 
 2. Cree usted mismo la carpeta **~/.local/share/daily-apt-autoupdate** u otra carpeta donde usted prefiera.
 
