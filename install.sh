@@ -92,7 +92,7 @@ previa() {
         echo -e "\033[1m Instalación cancelada.\033[0m"
         sleep 2
         exit
-fi
+    fi
 }
 
 uninstall() {
