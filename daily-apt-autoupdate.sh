@@ -37,18 +37,18 @@ fallo() {
     echo -e "  \033[1m|\033[0m                                                               \033[1m|\033[0m"
     echo -e "  \033[1m=================================================================\033[0m"
     echo -e ""
-    
+
     log_activity "FALLO" ": $3"
-    
+
     read cerrar
     exit
 }
 
 permisos() {
     echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para permitir las actualizaciones."
-    
+
     sudo echo ""
-    
+
     if [[ $? != 0 ]]; then      # Capturar fallo
         echo -e ""
         echo -e "\033[1mLa contraseña no es correcta.\033[0m"
@@ -74,16 +74,16 @@ exito() {
     echo -e ""
     echo -e "  * Presione \033[1mESC\033[0m para evitar que esta ventana se cierre dentro de 20 segundos."
     echo -e ""
-    
+
     log_activity "EXITO"
-    
+
     t_now=$(date +%s)
     t_end=$(date --date="+20 sec" +%s)
-    
+
     while [ $t_now -lt $t_end ]; do
         IFS=""
         read -sn 1 -t $(($t_end - $t_now)) cerrar
-        
+
         case $cerrar in
             $'\e')
                 echo -e "  Cuando haya terminado presione \033[1mENTER\033[0m para salir."
@@ -109,12 +109,12 @@ log_activity(){
         echo "=================================================================" >> $HOME/.local/share/daily-apt-autoupdate/activity.log
         sudo chown $USER:$GROUP $HOME/.local/share/daily-apt-autoupdate/activity.log
     fi
-    
+
     # Verificación del tamaño del log (máximo 30 registros).
     if [[ $(wc -l < $HOME/.local/share/daily-apt-autoupdate/activity.log) -ge 33 ]]; then
         sed -i 4,$(($(wc -l < $HOME/.local/share/daily-apt-autoupdate/activity.log) - 30))d $HOME/.local/share/daily-apt-autoupdate/activity.log
     fi
-    
+
     # Registro de actividad.
     echo -e "$(date +"%a %d %b %Y - %H:%M:%S") ··· $1$2" >> $HOME/.local/share/daily-apt-autoupdate/activity.log
 }
