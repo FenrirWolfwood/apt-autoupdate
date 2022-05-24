@@ -5,9 +5,9 @@
 #### TÍTULO ####
 
 echo -e ""
-    echo -e "  \033[1m=================================================================\033[0m"
-    echo -e "  \033[1m|               ACTUALIZACIÓN AUTOMÁTICA CON APT                |\033[0m"
-    echo -e "  \033[1m=================================================================\033[0m"
+echo -e "  \033[1m=================================================================\033[0m"
+echo -e "  \033[1m|               ACTUALIZACIÓN AUTOMÁTICA CON APT                |\033[0m"
+echo -e "  \033[1m=================================================================\033[0m"
 echo -e "   version 1.1.0"
 echo -e ""
 
@@ -39,16 +39,16 @@ fallo() {
     echo -e ""
     
     log_activity "FALLO" ": $3"
-
+    
     read cerrar
     exit
 }
 
 permisos() {
     echo -e "Introduzca la contraseña de \033[1msu usuario\033[0m para permitir las actualizaciones."
-
+    
     sudo echo ""
-
+    
     if [[ $? != 0 ]]; then      # Capturar fallo
         echo -e ""
         echo -e "\033[1mLa contraseña no es correcta.\033[0m"
@@ -88,11 +88,14 @@ exito() {
             $'\e')
                 echo -e "  Cuando haya terminado presione \033[1mENTER\033[0m para salir."
                 read cerrar
-                exit ;;
+                exit
+            ;;
             "")
-                exit ;;
+                exit
+            ;;
             *)
-                : ;;
+                :
+            ;;
         esac
         t_now=$(date +%s)
     done
